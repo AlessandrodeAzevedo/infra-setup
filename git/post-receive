@@ -1,0 +1,15 @@
+#!/bin/bash
+working_tree="##PATHFILES##"
+
+while read oldrev newrev refname
+do
+    branch=$(git rev-parse --symbolic --abbrev-ref $refname)
+    
+    GIT_WORK_TREE=$working_tree git checkout $branch -f
+
+    echo "   /==============================="
+    echo "   | DEPLOYMENT COMPLETED"
+    echo "   | Target folder: $working_tree"
+    echo "   | Branch name  : $branch"
+    echo "   \=============================="
+done
